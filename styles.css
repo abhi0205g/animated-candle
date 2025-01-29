@@ -12,7 +12,6 @@ body {
   position: relative;
   width: 50px;
   height: 150px;
-  cursor: grab; /* Indicates that the candle can be dragged */
 }
 
 .candle-body {
