@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1a1a1a;
+}
+
+.candle {
+  position: relative;
+  width: 50px;
+  height: 150px;
+}
+
+.candle-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #f0f0f0, #e0e0e0); /* White wax gradient */
+  border-radius: 10px 10px 0 0;
+  box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.flame {
+  position: absolute;
+  top: -40px; /* Adjusted to make the flame taller */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px; /* Flame width */
+  height: 60px; /* Flame height */
+  background: linear-gradient(to bottom, #ffdd00, #ff4500); /* Flame gradient */
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flicker 0.1s infinite ease-in-out;
+  box-shadow: 
+    0 0 10px #ffdd00, 
+    0 0 20px #ffdd00, 
+    0 0 30px #ffdd00;
+}
+
+@keyframes flicker {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05) translateY(-2px);
+  }
+}
+
+/* Inner flame for more realism */
+.flame::before {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 30px;
+  background: linear-gradient(to bottom, #ff4500, #ff0000); /* Inner flame gradient */
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  opacity: 0.8;
+}
+
+.sparkles {
+  position: absolute;
+  top: -50px; /* Adjusted to match the taller flame */
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  animation: sparkle 1s infinite;
+  box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff;
+}
+
+@keyframes sparkle {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.shadow {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  filter: blur(5px);
+  animation: shadow-pulse 1.5s infinite alternate;
+}
+
+@keyframes shadow-pulse {
+  0% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1);
+  }
+  100% {
+    transform: translateX(-50%) scale(0.9);
+  }
+}
