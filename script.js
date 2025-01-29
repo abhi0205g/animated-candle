@@ -1,16 +1,24 @@
-// Add sparkles dynamically
-const sparklesContainer = document.querySelector('.sparkles');
+// Make the candle movable
+const candle = document.getElementById("candle");
 
-function createSparkle() {
-  const sparkle = document.createElement('div');
-  sparkle.classList.add('sparkle');
-  sparkle.style.left = `${Math.random() * 20 - 10}px`;
-  sparkle.style.animationDelay = `${Math.random() * 1}s`;
-  sparklesContainer.appendChild(sparkle);
+let isDragging = false;
+let offsetX, offsetY;
 
-  setTimeout(() => {
-    sparkle.remove();
-  }, 1000);
-}
+candle.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  offsetX = e.clientX - candle.getBoundingClientRect().left;
+  offsetY = e.clientY - candle.getBoundingClientRect().top;
+  candle.style.cursor = "grabbing"; // Change cursor to grabbing
+});
 
-setInterval(createSparkle, 200);
+document.addEventListener("mousemove", (e) => {
+  if (isDragging) {
+    candle.style.left = `${e.clientX - offsetX}px`;
+    candle.style.top = `${e.clientY - offsetY}px`;
+  }
+});
+
+document.addEventListener("mouseup", () => {
+  isDragging = false;
+  candle.style.cursor = "grab"; // Change cursor back to grab
+});
