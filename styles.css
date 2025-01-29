@@ -9,10 +9,9 @@ body {
 }
 
 .candle {
-  position: absolute; /* Make the candle movable */
+  position: relative;
   width: 50px;
   height: 150px;
-  cursor: grab; /* Indicate that the candle is draggable */
 }
 
 .candle-body {
@@ -22,22 +21,47 @@ body {
   background: linear-gradient(to right, #f0f0f0, #e0e0e0); /* White wax gradient */
   border-radius: 10px 10px 0 0;
   box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  overflow: hidden; /* For texture effect */
+}
+
+/* Texture for the candle body */
+.candle-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%, transparent 80%);
+  background-size: 10px 10px; /* Noise pattern size */
+  opacity: 0.5; /* Adjust transparency of texture */
 }
 
 /* Melting wax effect */
 .candle-body::after {
   content: "";
   position: absolute;
-  top: -5px; /* Position near the flame */
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 20px;
-  height: 10px;
+  width: 30px;
+  height: 20px;
   background: #e0e0e0;
   border-radius: 50%;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: melt 5s infinite ease-in-out;
 }
 
+@keyframes melt {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+/* Realistic flame */
 .flame {
   position: absolute;
   top: -40px; /* Adjusted to make the flame taller */
