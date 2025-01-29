@@ -25,5 +25,3 @@ document.addEventListener('mouseup', () => {
   isDragging = false;
   candle.style.cursor = 'grab'; // Change the cursor back to grab
 });
-
-
